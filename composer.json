@@ -1,0 +1,135 @@
+{
+    "name": "dotkernel/api",
+    "type": "project",
+    "description": "Dotkernel API",
+    "license": "MIT",
+    "homepage": "https://www.dotkernel.org",
+    "support": {
+        "docs": "https://docs.dotkernel.org/api-documentation/",
+        "issues": "https://github.com/dotkernel/api/issues",
+        "source": "https://github.com/dotkernel/api",
+        "rss": "https://github.com/dotkernel/api/releases.atom"
+    },
+    "keywords": [
+        "api",
+        "REST",
+        "REST API",
+        "mezzio",
+        "laminas"
+    ],
+    "authors": [
+        {
+            "name": "Dotkernel Team",
+            "email": "team@dotkernel.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dotkernel/*": true,
+            "laminas/laminas-component-installer": true,
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "process-timeout": 0
+    },
+    "extra": {
+        "laminas": {
+            "component-whitelist": [
+                "laminas/laminas-httphandlerrunner"
+            ]
+        },
+        "mezzio": {
+            "component-whitelist": [
+                "mezzio/mezzio",
+                "mezzio/mezzio-helpers",
+                "mezzio/mezzio-router",
+                "mezzio/mezzio-fastroute"
+            ]
+        }
+    },
+    "require": {
+        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+        "ext-gd": "*",
+        "ext-json": "*",
+        "dotkernel/dot-cache": "^4.3",
+        "dotkernel/dot-cli": "^3.9.0",
+        "dotkernel/dot-data-fixtures": "^1.4.0",
+        "dotkernel/dot-dependency-injection": "^1.2",
+        "dotkernel/dot-errorhandler": "^4.0.0",
+        "dotkernel/dot-mail": "^5.3.0",
+        "dotkernel/dot-response-header": "^3.5.0",
+        "dotkernel/dot-router": "^1.0.5",
+        "laminas/laminas-authentication": "^2.18",
+        "laminas/laminas-component-installer": "^3.5.0",
+        "laminas/laminas-config-aggregator": "^1.18.0",
+        "laminas/laminas-hydrator": "^4.16.0",
+        "laminas/laminas-inputfilter": "^2.31.0",
+        "laminas/laminas-stdlib": "^3.20.0",
+        "mezzio/mezzio": "^3.20.1",
+        "mezzio/mezzio-authentication-oauth2": "^2.11.0",
+        "mezzio/mezzio-authorization-acl": "^1.11.0",
+        "mezzio/mezzio-authorization-rbac": "^1.8.0",
+        "mezzio/mezzio-cors": "^1.13.0",
+        "mezzio/mezzio-fastroute": "^3.12.0",
+        "mezzio/mezzio-hal": "^2.10.1",
+        "mezzio/mezzio-helpers": "^5.18",
+        "mezzio/mezzio-problem-details": "^1.15.0",
+        "ramsey/uuid": "^4.5.0",
+        "ramsey/uuid-doctrine": "^2.1.0",
+        "roave/psr-container-doctrine": "^5.2.2 || ^6.0.0",
+        "symfony/filesystem": "^7.2.0",
+        "zircote/swagger-php": "^5.0.7"
+    },
+    "require-dev": {
+        "dotkernel/dot-maker": "^1.0.2",
+        "laminas/laminas-coding-standard": "^3.0.1",
+        "laminas/laminas-development-mode": "^3.13.0",
+        "phpstan/phpstan": "^2.1.11",
+        "phpstan/phpstan-doctrine": "^2.0.2",
+        "phpstan/phpstan-phpunit": "^2.0.6",
+        "phpunit/phpunit": "^10.5.45",
+        "roave/security-advisories": "dev-latest",
+        "symfony/var-dumper": "^7.2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Api\\Admin\\": "src/Admin/src/",
+            "Api\\App\\": "src/App/src/",
+            "Api\\Security\\": "src/Security/src/",
+            "Api\\User\\": "src/User/src/",
+            "Core\\Admin\\": "src/Core/src/Admin/src/",
+            "Core\\App\\": "src/Core/src/App/src/",
+            "Core\\Security\\": "src/Core/src/Security/src/",
+            "Core\\Setting\\": "src/Core/src/Setting/src/",
+            "Core\\User\\": "src/Core/src/User/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ApiTest\\Functional\\": "test/Functional/",
+            "ApiTest\\Unit\\": "test/Unit/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test",
+            "@static-analysis"
+        ],
+        "clear-config-cache": "php bin/clear-config-cache.php",
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "make": "dot-maker",
+        "development-disable": "laminas-development-mode disable",
+        "development-enable": "laminas-development-mode enable",
+        "development-status": "laminas-development-mode status",
+        "post-update-cmd": [
+            "php ./vendor/bin/generate-oauth2-keys",
+            "php ./bin/composer-post-install-script.php"
+        ],
+        "serve": "php -S 0.0.0.0:8080 -t public/",
+        "static-analysis": "phpstan analyse --memory-limit 1G",
+        "test": "phpunit --colors=always"
+    }
+}
