@@ -20,6 +20,10 @@ coveralls-upload.json
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
+## MkDocs
+/venv/
+/public/docs/
+
 # JIRA plugin
 atlassian-ide-plugin.xml
 
@@ -36,6 +40,12 @@ composer.phar
 # Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 composer.lock
+
+# Eclipse Project Files
+.project
+.buildpath
+.settings/
+.externalToolBuilders
 
 .phpunit.result.cache
 .phpcs-cache

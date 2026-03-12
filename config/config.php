@@ -49,10 +49,13 @@ $aggregator = new Laminas\ConfigAggregator\ConfigAggregator([
     // Dotkernel modules
     Api\Admin\ConfigProvider::class,
     Api\App\ConfigProvider::class,
+    Api\Job\ConfigProvider::class,
     Api\Security\ConfigProvider::class,
     Api\User\ConfigProvider::class,
+    
     Core\Admin\ConfigProvider::class,
     Core\App\ConfigProvider::class,
+    Core\Job\ConfigProvider::class,
     Core\Security\ConfigProvider::class,
     Core\Setting\ConfigProvider::class,
     Core\User\ConfigProvider::class,
