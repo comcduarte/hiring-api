@@ -8,13 +8,13 @@ use Api\Job\InputFilter\Input\StringInput;
 use Core\App\InputFilter\AbstractInputFilter;
 
 /**
- * @phpstan-type CreateJobDataType array{}
- * @extends AbstractInputFilter<CreateJobDataType>
+ * @phpstan-type CreateJobTypeDataType array{}
+ * @extends AbstractInputFilter<CreateJobTypeDataType>
  */
-class CreateJobInputFilter extends AbstractInputFilter
+class CreateJobTypeInputFilter extends AbstractInputFilter
 {
     public function __construct()
     {
-        $this->add(new StringInput('contact'));
+        $this->add(new StringInput('type'));
     }
 }

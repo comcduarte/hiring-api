@@ -7,15 +7,25 @@ namespace Api\Job;
 use Api\App\ConfigProvider as AppConfigProvider;
 use Api\App\Factory\HandlerDelegatorFactory;
 use Api\Job\Collection\JobCollection;
+use Api\Job\Collection\JobTypeCollection;
 use Api\Job\Handler\Job\DeleteJobResourceHandler;
 use Api\Job\Handler\Job\GetJobCollectionHandler;
 use Api\Job\Handler\Job\GetJobResourceHandler;
 use Api\Job\Handler\Job\PatchJobResourceHandler;
 use Api\Job\Handler\Job\PostJobResourceHandler;
 use Api\Job\Handler\Job\PutJobResourceHandler;
+use Api\Job\Handler\JobType\DeleteJobTypeResourceHandler;
+use Api\Job\Handler\JobType\GetJobTypeCollectionHandler;
+use Api\Job\Handler\JobType\GetJobTypeResourceHandler;
+use Api\Job\Handler\JobType\PatchJobTypeResourceHandler;
+use Api\Job\Handler\JobType\PostJobTypeResourceHandler;
+use Api\Job\Handler\JobType\PutJobTypeResourceHandler;
 use Api\Job\Service\JobService;
 use Api\Job\Service\JobServiceInterface;
+use Api\Job\Service\JobTypeService;
+use Api\Job\Service\JobTypeServiceInterface;
 use Core\Job\Entity\Job;
+use Core\Job\Entity\JobType;
 use Dot\DependencyInjection\Factory\AttributedServiceFactory;
 use Mezzio\Application;
 use Mezzio\Hal\Metadata\MetadataMap;
@@ -58,8 +68,16 @@ class ConfigProvider
                 PatchJobResourceHandler::class => [HandlerDelegatorFactory::class],
                 PostJobResourceHandler::class => [HandlerDelegatorFactory::class],
                 PutJobResourceHandler::class => [HandlerDelegatorFactory::class],
+                
+                DeleteJobTypeResourceHandler::class => [HandlerDelegatorFactory::class],
+                GetJobTypeResourceHandler::class => [HandlerDelegatorFactory::class],
+                GetJobTypeCollectionHandler::class => [HandlerDelegatorFactory::class],
+                PatchJobTypeResourceHandler::class => [HandlerDelegatorFactory::class],
+                PostJobTypeResourceHandler::class => [HandlerDelegatorFactory::class],
+                PutJobTypeResourceHandler::class => [HandlerDelegatorFactory::class],
             ],
             'factories'  => [
+                //-- Job --//
                 DeleteJobResourceHandler::class => AttributedServiceFactory::class,
                 GetJobResourceHandler::class => AttributedServiceFactory::class,
                 GetJobCollectionHandler::class => AttributedServiceFactory::class,
@@ -67,9 +85,20 @@ class ConfigProvider
                 PostJobResourceHandler::class => AttributedServiceFactory::class,
                 PutJobResourceHandler::class => AttributedServiceFactory::class,
                 JobService::class => AttributedServiceFactory::class,
+                
+                //-- JobType --//
+                JobTypeService::class => AttributedServiceFactory::class,
+                DeleteJobTypeResourceHandler::class => AttributedServiceFactory::class,
+                GetJobTypeResourceHandler::class => AttributedServiceFactory::class,
+                GetJobTypeCollectionHandler::class => AttributedServiceFactory::class,
+                PatchJobTypeResourceHandler::class => AttributedServiceFactory::class,
+                PostJobTypeResourceHandler::class => AttributedServiceFactory::class,
+                PutJobTypeResourceHandler::class => AttributedServiceFactory::class,
+                
             ],
             'aliases'    => [
                 JobServiceInterface::class => JobService::class,
+                JobTypeServiceInterface::class => JobTypeService::class,
             ],
         ];
     }
@@ -81,7 +110,9 @@ class ConfigProvider
     {
         return [
             AppConfigProvider::getCollection(JobCollection::class, 'job::list-job', 'Jobs'),
+            AppConfigProvider::getCollection(JobTypeCollection::class, 'jobtype::list-jobtype', 'JobTypes'),
             AppConfigProvider::getResource(Job::class, 'job::view-job'),
+            AppConfigProvider::getResource(JobType::class, 'jobtype::view-jobtype')
         ];
     }
 }

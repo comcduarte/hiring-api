@@ -65,9 +65,6 @@ return [
             UserRoleEnum::Guest->value      => [
                 'app::create-error-report',
                 'app::view-index',
-                'job::list-job',
-                'job::create-job',
-                'job::view-job',
                 'user::activate-account',
                 'user::request-activate-account',
                 'user::recover-account',
@@ -77,6 +74,13 @@ return [
                 'user::create-account',
                 'security::generate-token',
                 'security::refresh-token',
+                
+                'job::list-job',
+                'job::create-job',
+                'job::view-job',
+                'jobtype::list-jobtype',
+                'jobtype::create-jobtype',
+                'jobtype::view-jobtype',
             ],
         ],
     ],

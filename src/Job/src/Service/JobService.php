@@ -62,6 +62,7 @@ class JobService implements JobServiceInterface
     ): Job {
         if (! $job instanceof Job) {
             $job = new Job();
+            $job->exchangeArray($data);
         }
 
         $this->jobRepository->saveResource($job);
